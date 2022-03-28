@@ -3,6 +3,9 @@ Vagrant.configure("2") do |config|
   config.vm.hostname = "docker-engine"                                  # hostname of the virtual machine
   config.vm.network "forwarded_port", guest: 2375, host: 2375           # forwarding docker port to the host, don't change this!
 
+  config.vm.synced_folder ".", "/vagrant", disabled: true
+  config.vm.synced_folder "./logs", "/logs", owner: "root", group: "root", mount_options: ["dmode=777,fmode=777"]
+
   config.vm.network "forwarded_port", guest: 80, host: 10000            # you can forward a port that you need
   config.vm.network "forwarded_port", guest: 3306, host: 10001          # you can forward a port that you need
 
